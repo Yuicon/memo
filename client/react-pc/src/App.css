@@ -1,28 +1,52 @@
-.App {
-  text-align: center;
+body {
+font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+font-size: 15px;
+color: #262626;
+background: #f3f3f3;
+-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.login {
+    text-align: left;
+    padding-top: 22vh;
+    width: 8rem;
 }
 
-.App-title {
-  font-size: 1.5em;
+.login h3 {
+    font-size: 20px;
+    color: black;
+    width: 8rem;
+    padding: .3rem 0;
 }
 
-.App-intro {
-  font-size: large;
+.login label {
+    padding: .2rem 0;
+    font-size: 16px;
+    width: 8rem;
+    font-weight: normal;
+    color: #666666;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.login input:focus {
+    box-shadow: inset 0 0 0 1px #1a8cff;
+}
+
+.login input {
+    outline: none;
+    resize: none;
+    padding: .1rem .2rem;
+    border-radius: .1rem;
+    width: 8rem;
+    height: .5rem;
+    font-size: .28rem;
+    line-height: .7rem;
+    border: none;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
 }

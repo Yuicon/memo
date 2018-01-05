@@ -21,6 +21,7 @@ public class UserRoute {
         return route(GET("/users").and(accept(APPLICATION_JSON)), userHandler::getUsers)
                 .andRoute(POST("/user").and(accept(APPLICATION_JSON)), userHandler::saveUser)
                 .andRoute(GET("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::getUser)
+                .andRoute(GET("/user").and(accept(APPLICATION_JSON)), userHandler::getUserByName)
                 .andRoute(DELETE("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::deleteUser);
     }
 

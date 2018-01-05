@@ -13,6 +13,6 @@ import reactor.core.publisher.Mono;
 @Primary
 public interface UserRepository extends ReactiveMongoRepository<User, String> {
 
-    Mono<User> findOneByName(final String name);
+    Mono<User> findByName(final String name);
 
 }

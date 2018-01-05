@@ -9,8 +9,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.http.MediaType.TEXT_PLAIN;
-import static org.springframework.web.reactive.function.BodyInserters.fromObject;
 
 /**
  * @author Yuicon
@@ -28,6 +26,10 @@ public class UserHandler {
 
     public Mono<ServerResponse> getUser(ServerRequest request) {
         return ServerResponse.ok().contentType(APPLICATION_JSON).body(this.userRepository.findById(request.pathVariable("id")), User.class);
+    }
+
+    public Mono<ServerResponse> getUserByName(ServerRequest request) {
+        return ServerResponse.ok().contentType(APPLICATION_JSON).body(this.userRepository.findByName(String.valueOf(request.queryParam("name").orElse(""))), User.class);
     }
 
     public Mono<ServerResponse> getUsers(ServerRequest request) {

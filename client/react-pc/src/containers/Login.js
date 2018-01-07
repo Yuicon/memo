@@ -1,22 +1,53 @@
 import React, {Component} from 'react';
+import Input from "../components/common/Input";
+import Button from "../components/common/Button";
 
-export default class Login extends Component {
+class Login extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            loginParameters: {},
+        };
+    }
+
+    handleChange = (field, value) => {
+        const loginParameters = Object.assign({}, this.state.loginParameters);
+        loginParameters[field] = value;
+        this.setState({loginParameters}, () => console.log(this.state.loginParameters));
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('handleSubmit');
+    };
 
     render() {
-        return(
+        return (
             <div className="flex full-screen">
-                <main className="flex login">
+                <form className="flex login" onSubmit={this.handleSubmit}>
                     <h3>登陆</h3>
                     <label htmlFor="email">邮箱</label>
-                    <input type="email" name="email" id="email"/>
+                    <Input type="email" name="email" id="email" required={true}
+                           onChange={this.handleChange.bind(this, 'email')}/>
                     <label htmlFor="secretKey">密匙</label>
-                    <input type="text" name="secretKey" id="secretKey"/>
+                    <Input type="text" name="secretKey" id="secretKey" required={true}
+                           other={{
+                               autoComplete: 'off'
+                           }}
+                           onChange={this.handleChange.bind(this, 'secretKey')}/>
                     <label htmlFor="masterPassword">主密码</label>
-                    <input type="password" name="masterPassword" id="masterPassword"/>
-                </main>
+                    <Input type="password" name="masterPassword" id="masterPassword" required={true}
+                           other={{
+                               autoComplete: 'off'
+                           }}
+                           onChange={this.handleChange.bind(this, 'masterPassword')}/>
+                    <Button type='submit' value='登陆'/>
+                </form>
             </div>
         );
     }
 
-
 }
+
+export default Login;

@@ -54,3 +54,27 @@ background: #f3f3f3;
     border: none;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
 }
+
+.button {
+    border-radius: 4px;
+    height: .6rem;
+    font-size: .25rem;
+    margin: .3rem;
+    color: #fff;
+    background-color: #1890ff;
+    border: 1px solid transparent;
+    cursor: pointer;
+    padding: 0 15px;
+}
+
+.button:hover {
+    color: #fff;
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+}
+
+.button:active {
+    color: #fff;
+    background-color: #096dd9;
+    border-color: #096dd9;
+}

@@ -4,7 +4,7 @@ export default class Login extends Component {
 
     render() {
         return(
-            <div className="flex">
+            <div className="flex full-screen">
                 <main className="flex login">
                     <h3>登陆</h3>
                     <label htmlFor="email">邮箱</label>

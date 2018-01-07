@@ -13,9 +13,13 @@ background: #f3f3f3;
     flex-wrap: wrap;
 }
 
+.full-screen {
+    width: 100vw;
+    height: 100vh;
+}
+
 .login {
     text-align: left;
-    padding-top: 22vh;
     width: 8rem;
 }
 

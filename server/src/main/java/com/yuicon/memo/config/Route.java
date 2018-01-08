@@ -1,6 +1,6 @@
 package com.yuicon.memo.config;
 
-import com.yuicon.memo.handler.PasswordRecordHandler;
+import com.yuicon.memo.handler.RecordHandler;
 import com.yuicon.memo.handler.UserHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,11 +19,11 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class Route {
 
     private final UserHandler userHandler;
-    private final PasswordRecordHandler passwordRecordHandler;
+    private final RecordHandler recordHandler;
 
     @Autowired
-    public Route(UserHandler userHandler, PasswordRecordHandler passwordRecordHandler) {
-        this.passwordRecordHandler = passwordRecordHandler;
+    public Route(UserHandler userHandler, RecordHandler recordHandler) {
+        this.recordHandler = recordHandler;
         this.userHandler = userHandler;
     }
 
@@ -37,9 +37,9 @@ public class Route {
                 .andRoute(GET("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::getUser)
                 .andRoute(GET("/user").and(accept(APPLICATION_JSON)), userHandler::getUserByName)
                 .andRoute(DELETE("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::deleteUser)
-                .andRoute(GET("/passwords").and(accept(APPLICATION_JSON)), passwordRecordHandler::passwordRecords)
-                .andRoute(POST("/password").and(accept(APPLICATION_JSON)), passwordRecordHandler::save)
-                .andRoute(DELETE("/password/{id}").and(accept(APPLICATION_JSON)), passwordRecordHandler::delete);
+                .andRoute(GET("/records").and(accept(APPLICATION_JSON)), recordHandler::records)
+                .andRoute(POST("/record").and(accept(APPLICATION_JSON)), recordHandler::save)
+                .andRoute(DELETE("/record/{id}").and(accept(APPLICATION_JSON)), recordHandler::delete);
     }
 
 }

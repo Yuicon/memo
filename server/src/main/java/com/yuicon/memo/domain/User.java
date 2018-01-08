@@ -24,7 +24,7 @@ public class User {
     private String masterPassword;
 
     @DBRef
-    private List<PasswordRecord> passwordRecords;
+    private List<Record> records;
 
     @Override
     public String toString() {
@@ -36,21 +36,12 @@ public class User {
                 '}';
     }
 
-    public User() {
+    public List<Record> getRecords() {
+        return records;
     }
 
-    public User(String name, String email, String masterPassword) {
-        this.name = name;
-        this.email = email;
-        this.masterPassword = masterPassword;
-    }
-
-    public List<PasswordRecord> getPasswordRecords() {
-        return passwordRecords;
-    }
-
-    public void setPasswordRecords(List<PasswordRecord> passwordRecords) {
-        this.passwordRecords = passwordRecords;
+    public void setRecords(List<Record> records) {
+        this.records = records;
     }
 
     public String getid() {

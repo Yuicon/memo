@@ -2,7 +2,10 @@ package com.yuicon.memo.domain;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 /**
  * @author Yuicon
@@ -19,6 +22,9 @@ public class User {
     private String email;
 
     private String masterPassword;
+
+    @DBRef
+    private List<PasswordRecord> passwordRecords;
 
     @Override
     public String toString() {
@@ -37,6 +43,14 @@ public class User {
         this.name = name;
         this.email = email;
         this.masterPassword = masterPassword;
+    }
+
+    public List<PasswordRecord> getPasswordRecords() {
+        return passwordRecords;
+    }
+
+    public void setPasswordRecords(List<PasswordRecord> passwordRecords) {
+        this.passwordRecords = passwordRecords;
     }
 
     public String getid() {

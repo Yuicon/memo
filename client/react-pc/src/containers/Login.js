@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
+import TextButton from "../components/common/TextButton";
 
 class Login extends Component {
 
@@ -43,6 +44,7 @@ class Login extends Component {
                            }}
                            onChange={this.handleChange.bind(this, 'masterPassword')}/>
                     <Button type='submit' value='登陆'/>
+                    <TextButton/>
                 </form>
             </div>
         );

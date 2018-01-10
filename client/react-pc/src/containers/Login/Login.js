@@ -1,8 +1,12 @@
 import React, {Component} from 'react';
-import Input from "../components/common/Input";
-import Button from "../components/common/Button";
-import TextButton from "../components/common/TextButton";
+import Input from "../../components/common/Input";
+import Button from "../../components/common/Button";
+import TextButton from "../../components/common/TextButton";
+import {observer, inject} from "mobx-react";
+import PropTypes from "prop-types";
 
+@inject("userStore")
+@observer
 class Login extends Component {
 
     constructor(props) {
@@ -44,12 +48,16 @@ class Login extends Component {
                            }}
                            onChange={this.handleChange.bind(this, 'masterPassword')}/>
                     <Button type='submit' value='登陆'/>
-                    <TextButton/>
+                    <TextButton value='注册'/>
                 </form>
             </div>
         );
     }
 
 }
+
+Login.propTypes = {
+    userStore: PropTypes.object,
+};
 
 export default Login;

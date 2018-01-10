@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './App.css';
 import {observer, Provider} from "mobx-react";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
-import Login from "./containers/Login";
+import Login from "./containers/Login/Login";
 
 @observer
 class App extends Component {
@@ -14,6 +14,7 @@ class App extends Component {
         return (
             <Provider
                 rootStore={rootStore}
+                userStore={rootStore.userStore}
             >
                 <Router>
                     <main className="App">

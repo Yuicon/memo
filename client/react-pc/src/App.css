@@ -62,9 +62,10 @@ background: #f3f3f3;
     margin: .3rem;
     color: #fff;
     background-color: #1890ff;
-    border: 1px solid transparent;
+    border: none;
     cursor: pointer;
     padding: 0 15px;
+    transition: all .3s ease-out;
 }
 
 .button:hover {
@@ -89,8 +90,4 @@ background: #f3f3f3;
     background-color: transparent;
     text-align: center;
     cursor: pointer;
-}
-
-.text-button:hover {
-    color: #5259ff;
 }

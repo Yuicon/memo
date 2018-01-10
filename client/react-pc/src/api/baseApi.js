@@ -5,6 +5,13 @@ import 'whatwg-fetch';
 
 const authPrefix = 'Token';
 
+export const HOST = 'http://localhost:8080';
+
+export const apiHeaders = {
+    'Authorization': `${authPrefix} ${localStorage.getItem('accessToken')}`,
+    'Content-Type': 'application/json; charset=utf-8',
+};
+
 function toQueryString(obj, urlEncode) {
     function flattenObj(x, path) {
         const result = [];
@@ -62,7 +69,8 @@ function toQueryString(obj, urlEncode) {
     }
 }
 
-function get(url, queryParam = {}) {
+function get(url, queryParam = {}, host = HOST) {
+    url = `${host}/${url}`;
     let queryStr = toQueryString(queryParam);
     let s = /\?/i.test(url) ? '&' : '?';
     if (!/^\s*$/.test(queryStr)) {
@@ -74,7 +82,8 @@ function get(url, queryParam = {}) {
     });
 }
 
-function $delete(url, queryParam = {}) {
+function $delete(url, queryParam = {}, host = HOST) {
+    url = `${host}/${url}`;
     let queryStr = toQueryString(queryParam);
     let s = /\?/i.test(url) ? '&' : '?';
     if (!/^\s*$/.test(queryStr)) {
@@ -86,7 +95,8 @@ function $delete(url, queryParam = {}) {
     });
 }
 
-function post(url, params = {}) {
+function post(url, params = {}, host = HOST) {
+    url = `${host}/${url}`;
     return fetch(url, {
         method: 'POST',
         headers: apiHeaders,
@@ -107,13 +117,6 @@ export const resolve = (res) => {
                 return data;
             })
     }
-};
-
-export const HOST = 'http://localhost:8080';
-
-export const apiHeaders = {
-    'Authorization': `${authPrefix} ${localStorage.getItem('accessToken')}`,
-    'Content-Type': 'application/json; charset=utf-8',
 };
 
 export const http = {};

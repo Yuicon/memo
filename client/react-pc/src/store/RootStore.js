@@ -3,6 +3,7 @@
  */
 
 import {observable, action, runInAction} from 'mobx';
+import {UserStore} from "./UserStore";
 
 class RootStore {
 
@@ -10,7 +11,7 @@ class RootStore {
     @observable animating = false;
 
     constructor() {
-
+        this.userStore = new UserStore(this);
     }
 
     @action('发起请求')

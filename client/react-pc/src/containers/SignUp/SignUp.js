@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 
 @inject("userStore")
 @observer
-class Login extends Component {
+class SignUp extends Component {
 
     constructor(props) {
         super(props);
@@ -28,29 +28,35 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('handleSubmit');
+        this.props.userStore.signUpAction(this.state.loginParameters).then(() => {
+            console.log(this.props.userStore.currentUser);
+        })
     };
 
     handleClick = () => {
-        this.props.history.push('/signup');
+        this.props.history.push('/login');
     };
 
     render() {
         return (
             <div className="flex full-screen">
                 <form className="flex login" onSubmit={this.handleSubmit}>
-                    <h3>登陆</h3>
+                    <h3>注册</h3>
                     <label htmlFor="email">邮箱</label>
                     <Input type="email" name="email" id="email" required={true}
                            onChange={this.handleChange.bind(this, 'email')}/>
+                    <label htmlFor="name">昵称</label>
+                    <Input type="text" name="name" id="name" required={true}
+                           onChange={this.handleChange.bind(this, 'name')}/>
                     <label htmlFor="masterPassword">主密码</label>
                     <Input type="password" name="masterPassword" id="masterPassword" required={true}
                            other={{
-                               autoComplete: 'off'
+                               autoComplete: 'off',
+                               minLength: 6
                            }}
                            onChange={this.handleChange.bind(this, 'masterPassword')}/>
-                    <Button type='submit' value='登陆'/>
-                    <TextButton value='注册' onClick={this.handleClick}/>
+                    <Button type='submit' value='注册'/>
+                    <TextButton value='登陆' onClick={this.handleClick}/>
                 </form>
             </div>
         );
@@ -58,9 +64,9 @@ class Login extends Component {
 
 }
 
-Login.propTypes = {
+SignUp.propTypes = {
     userStore: PropTypes.object,
     history: PropTypes.object,
 };
 
-export default Login;
+export default SignUp;

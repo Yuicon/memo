@@ -4,6 +4,7 @@ import './App.css';
 import {observer, Provider} from "mobx-react";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Login from "./containers/Login/Login";
+import SignUp from "./containers/SignUp/SignUp";
 
 @observer
 class App extends Component {
@@ -19,6 +20,8 @@ class App extends Component {
                 <Router>
                     <main className="App">
                         <Route exact path="/" component={Login}/>
+                        <Route exact path="/login" component={Login}/>
+                        <Route exact path="/signup" component={SignUp}/>
                     </main>
                 </Router>
             </Provider>

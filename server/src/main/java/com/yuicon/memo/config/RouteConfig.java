@@ -16,13 +16,13 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
  * @author Yuicon
  */
 @Configuration
-public class Route {
+public class RouteConfig {
 
     private final UserHandler userHandler;
     private final RecordHandler recordHandler;
 
     @Autowired
-    public Route(UserHandler userHandler, RecordHandler recordHandler) {
+    public RouteConfig(UserHandler userHandler, RecordHandler recordHandler) {
         this.recordHandler = recordHandler;
         this.userHandler = userHandler;
     }
@@ -33,6 +33,7 @@ public class Route {
     @Bean
     public RouterFunction<ServerResponse> restaurantRouter() {
         return route(GET("/users").and(accept(APPLICATION_JSON)), userHandler::getUsers)
+                .andRoute(OPTIONS("/**").and(accept(APPLICATION_JSON)), userHandler::getUser)
                 .and(route(POST("/user").and(accept(APPLICATION_JSON)), userHandler::saveUser))
                 .andRoute(GET("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::getUser)
                 .andRoute(GET("/user").and(accept(APPLICATION_JSON)), userHandler::getUserByName)

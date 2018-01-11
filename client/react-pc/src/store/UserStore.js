@@ -14,10 +14,11 @@ export class UserStore {
     @observable currentUser = new User();
 
     @action('注册')
-    async registerAction(params = {}) {
+    async signUpAction(params = {}) {
         try {
             return this.rootStore.fetch(async () => {
                 const data = await userApi.create(params);
+                console.log(data);
                 runInAction(() => {
                     this.currentUser = new User(data);
                 });

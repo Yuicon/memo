@@ -9,7 +9,7 @@ export const HOST = 'http://localhost:8080';
 
 export const apiHeaders = {
     'Authorization': `${authPrefix} ${localStorage.getItem('accessToken')}`,
-    'Content-Type': 'application/json; charset=utf-8',
+    'Content-Type': 'application/json',
 };
 
 function toQueryString(obj, urlEncode) {

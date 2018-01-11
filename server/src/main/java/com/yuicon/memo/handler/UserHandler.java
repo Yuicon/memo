@@ -38,7 +38,7 @@ public class UserHandler {
 
     public Mono<ServerResponse> saveUser(ServerRequest request) {
         Mono<User> user = request.bodyToMono(User.class);
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(this.userRepository.insert(user), User.class);
+        return ServerResponse.ok().contentType(APPLICATION_JSON).body(this.userRepository.insert(user).last(), User.class);
     }
 
     public Mono<ServerResponse> deleteUser(ServerRequest request) {

@@ -33,7 +33,7 @@ public class RouteConfig {
     @Bean
     public RouterFunction<ServerResponse> restaurantRouter() {
         return route(GET("/users").and(accept(APPLICATION_JSON)), userHandler::getUsers)
-                .andRoute(OPTIONS("/**").and(accept(APPLICATION_JSON)), userHandler::getUser)
+                .andRoute(OPTIONS("/**").and(accept(APPLICATION_JSON)), request -> ServerResponse.ok().build())
                 .and(route(POST("/user").and(accept(APPLICATION_JSON)), userHandler::saveUser))
                 .andRoute(GET("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::getUser)
                 .andRoute(GET("/user").and(accept(APPLICATION_JSON)), userHandler::getUserByName)

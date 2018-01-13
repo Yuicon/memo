@@ -1,7 +1,6 @@
 package com.yuicon.memo.domain;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -27,7 +26,6 @@ public class User {
     @DBRef
     private List<Record> records;
 
-    @Transient
     private String token;
 
     public void buildToken() {
@@ -44,14 +42,6 @@ public class User {
                 '}';
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
     public List<Record> getRecords() {
         return records;
     }
@@ -62,10 +52,6 @@ public class User {
 
     public String getid() {
         return id;
-    }
-
-    public void setid(String id) {
-        this.id = id;
     }
 
     public String getName() {

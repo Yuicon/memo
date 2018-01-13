@@ -8,7 +8,7 @@ import java.util.List;
  */
 class SecurityManager {
 
-    private static final List<String> ALLOW_PATH_LIST = Arrays.asList("login", "signin");
+    private static final List<String> ALLOW_PATH_LIST = Arrays.asList("/login", "/signin");
 
     static Boolean allowAccessTo(String path) {
         return ALLOW_PATH_LIST.contains(path);

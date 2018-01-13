@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
@@ -32,15 +33,24 @@ public class RouteConfig {
      */
     @Bean
     public RouterFunction<ServerResponse> restaurantRouter() {
-        return route(GET("/users").and(accept(APPLICATION_JSON)), userHandler::getUsers)
+        return route(GET("/users").and(accept(APPLICATION_JSON)), userHandler::users)
                 .andRoute(OPTIONS("/**").and(accept(APPLICATION_JSON)), request -> ServerResponse.ok().build())
-                .and(route(POST("/user").and(accept(APPLICATION_JSON)), userHandler::saveUser))
-                .andRoute(GET("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::getUser)
-                .andRoute(GET("/user").and(accept(APPLICATION_JSON)), userHandler::getUserByName)
-                .andRoute(DELETE("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::deleteUser)
+                .and(route(POST("/signin").and(accept(APPLICATION_JSON)), userHandler::save))
+                .andRoute(GET("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::user)
+                .andRoute(GET("/user").and(accept(APPLICATION_JSON)), userHandler::findUserByName)
+                .andRoute(POST("/login").and(accept(APPLICATION_JSON)), userHandler::login)
+                .andRoute(DELETE("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::delete)
                 .andRoute(GET("/records").and(accept(APPLICATION_JSON)), recordHandler::records)
                 .andRoute(POST("/record").and(accept(APPLICATION_JSON)), recordHandler::save)
-                .andRoute(DELETE("/record/{id}").and(accept(APPLICATION_JSON)), recordHandler::delete);
+                .andRoute(DELETE("/record/{id}").and(accept(APPLICATION_JSON)), recordHandler::delete)
+                .filter((request, next) -> {
+                    if (SecurityManager.allowAccessTo(request.path())) {
+                        return next.handle(request);
+                    }
+                    else {
+                        return ServerResponse.status(UNAUTHORIZED).build();
+                    }
+                });
     }
 
 }

@@ -13,6 +13,19 @@ import reactor.core.publisher.Mono;
 @Primary
 public interface UserRepository extends ReactiveMongoRepository<User, String> {
 
+    /**
+     * 根据名字查找用户
+     * @param name 名字
+     * @return 用户
+     */
     Mono<User> findByName(final String name);
+
+    /**
+     * 登陆查询
+     * @param email 邮箱
+     * @param masterPassword 主密码
+     * @return 用户
+     */
+    Mono<User> findByEmailAndMasterPassword(final String email, final String masterPassword);
 
 }

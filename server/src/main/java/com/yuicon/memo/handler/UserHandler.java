@@ -24,25 +24,43 @@ public class UserHandler {
         this.userRepository = userRepository;
     }
 
-    public Mono<ServerResponse> getUser(ServerRequest request) {
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(this.userRepository.findById(request.pathVariable("id")), User.class);
+    public Mono<ServerResponse> user(ServerRequest request) {
+        return ServerResponse.ok().contentType(APPLICATION_JSON)
+                .body(this.userRepository.findById(request.pathVariable("id")), User.class);
     }
 
-    public Mono<ServerResponse> getUserByName(ServerRequest request) {
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(this.userRepository.findByName(String.valueOf(request.queryParam("name").orElse(""))), User.class);
+    public Mono<ServerResponse> findUserByName(ServerRequest request) {
+        return ServerResponse.ok().contentType(APPLICATION_JSON)
+                .body(this.userRepository.findByName(String.valueOf(request.queryParam("name").orElse("")))
+                        , User.class);
     }
 
-    public Mono<ServerResponse> getUsers(ServerRequest request) {
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(this.userRepository.findAll(), User.class);
+    public Mono<ServerResponse> login(ServerRequest request) {
+        Mono<User> userMono = request.bodyToMono(User.class)
+                .flatMap(user ->
+                        this.userRepository.findByEmailAndMasterPassword(user.getEmail(), user.getMasterPassword()));
+        userMono.hasElement().doOnNext(aBoolean -> {
+            if (aBoolean) {
+                userMono.doOnNext(User::buildToken);
+            }
+        });
+        return ServerResponse.ok().contentType(APPLICATION_JSON).body(userMono, User.class);
     }
 
-    public Mono<ServerResponse> saveUser(ServerRequest request) {
+    public Mono<ServerResponse> users(ServerRequest request) {
+        return ServerResponse.ok().contentType(APPLICATION_JSON)
+                .body(this.userRepository.findAll(), User.class);
+    }
+
+    public Mono<ServerResponse> save(ServerRequest request) {
         Mono<User> user = request.bodyToMono(User.class);
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(this.userRepository.insert(user).last(), User.class);
+        return ServerResponse.ok().contentType(APPLICATION_JSON)
+                .body(this.userRepository.insert(user).last(), User.class);
     }
 
-    public Mono<ServerResponse> deleteUser(ServerRequest request) {
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(this.userRepository.deleteById(request.pathVariable("id")), Void.class);
+    public Mono<ServerResponse> delete(ServerRequest request) {
+        return ServerResponse.ok().contentType(APPLICATION_JSON)
+                .body(this.userRepository.deleteById(request.pathVariable("id")), Void.class);
     }
 
 }

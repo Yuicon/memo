@@ -38,12 +38,8 @@ public class UserHandler {
     public Mono<ServerResponse> login(ServerRequest request) {
         Mono<User> userMono = request.bodyToMono(User.class)
                 .flatMap(user ->
-                        this.userRepository.findByEmailAndMasterPassword(user.getEmail(), user.getMasterPassword()));
-        userMono.hasElement().doOnNext(aBoolean -> {
-            if (aBoolean) {
-                userMono.doOnNext(User::buildToken);
-            }
-        });
+                        this.userRepository.findByEmailAndMasterPassword(user.getEmail(), user.getMasterPassword()))
+                .doOnNext(User::buildToken);
         return ServerResponse.ok().contentType(APPLICATION_JSON).body(userMono, User.class);
     }
 
@@ -55,7 +51,7 @@ public class UserHandler {
     public Mono<ServerResponse> save(ServerRequest request) {
         Mono<User> user = request.bodyToMono(User.class);
         return ServerResponse.ok().contentType(APPLICATION_JSON)
-                .body(this.userRepository.insert(user).last(), User.class);
+                .body(this.userRepository.insert(user).last().doOnNext(User::buildToken), User.class);
     }
 
     public Mono<ServerResponse> delete(ServerRequest request) {

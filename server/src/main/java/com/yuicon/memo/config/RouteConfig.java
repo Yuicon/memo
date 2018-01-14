@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
@@ -43,14 +45,7 @@ public class RouteConfig {
                 .andRoute(GET("/records").and(accept(APPLICATION_JSON)), recordHandler::records)
                 .andRoute(POST("/record").and(accept(APPLICATION_JSON)), recordHandler::save)
                 .andRoute(DELETE("/record/{id}").and(accept(APPLICATION_JSON)), recordHandler::delete)
-                .filter((request, next) -> {
-                    if (SecurityManager.allowAccessTo(request.path())) {
-                        return next.handle(request);
-                    }
-                    else {
-                        return ServerResponse.status(UNAUTHORIZED).build();
-                    }
-                });
+                .filter(SecurityManager::allowAccessTo);
     }
 
 }

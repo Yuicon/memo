@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Collections;
@@ -31,15 +30,16 @@ public class RecordHandler {
     }
 
     public Mono<ServerResponse> save(ServerRequest request) {
-        Flux<User> userFlux = request.bodyToMono(Record.class)
+        return request.bodyToMono(Record.class)
                 .flatMap(this.recordRepository::insert)
-                .flux()
                 .flatMap(record -> this.userRepository.findById(request.queryParam("uid").orElse(""))
                         .flatMap(user -> {
                             user.setRecords(Collections.singletonList(record));
                             return this.userRepository.save(user);
-                        }));
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(userFlux, User.class);
+                        }))
+                .doOnNext(User::buildToken)
+                .flatMap(user -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(user), User.class))
+                .switchIfEmpty(ServerResponse.unprocessableEntity().build());
     }
 
     public Mono<ServerResponse> records(ServerRequest request) {

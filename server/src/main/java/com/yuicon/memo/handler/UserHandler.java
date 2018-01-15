@@ -25,22 +25,24 @@ public class UserHandler {
     }
 
     public Mono<ServerResponse> user(ServerRequest request) {
-        return ServerResponse.ok().contentType(APPLICATION_JSON)
-                .body(this.userRepository.findById(request.pathVariable("id")), User.class);
+        return this.userRepository.findById(request.pathVariable("id"))
+                .flatMap(user -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(user), User.class))
+                .switchIfEmpty(ServerResponse.notFound().build());
     }
 
     public Mono<ServerResponse> findUserByName(ServerRequest request) {
-        return ServerResponse.ok().contentType(APPLICATION_JSON)
-                .body(this.userRepository.findByName(String.valueOf(request.queryParam("name").orElse("")))
-                        , User.class);
+        return this.userRepository.findByName(String.valueOf(request.queryParam("name").orElse("")))
+                .flatMap(user -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(user), User.class))
+                .switchIfEmpty(ServerResponse.notFound().build());
     }
 
     public Mono<ServerResponse> login(ServerRequest request) {
-        Mono<User> userMono = request.bodyToMono(User.class)
+        return request.bodyToMono(User.class)
                 .flatMap(user ->
                         this.userRepository.findByEmailAndMasterPassword(user.getEmail(), user.getMasterPassword()))
-                .doOnNext(User::buildToken);
-        return ServerResponse.ok().contentType(APPLICATION_JSON).body(userMono, User.class);
+                .doOnNext(User::buildToken)
+                .flatMap(user -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(user), User.class))
+                .switchIfEmpty(ServerResponse.notFound().build());
     }
 
     public Mono<ServerResponse> users(ServerRequest request) {
@@ -49,9 +51,11 @@ public class UserHandler {
     }
 
     public Mono<ServerResponse> save(ServerRequest request) {
-        Mono<User> user = request.bodyToMono(User.class);
-        return ServerResponse.ok().contentType(APPLICATION_JSON)
-                .body(this.userRepository.insert(user).last().doOnNext(User::buildToken), User.class);
+        return request.bodyToMono(User.class)
+                .flatMap(this.userRepository::insert)
+                .doOnNext(User::buildToken)
+                .flatMap(user -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(user), User.class))
+                .switchIfEmpty(ServerResponse.unprocessableEntity().build());
     }
 
     public Mono<ServerResponse> delete(ServerRequest request) {

@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import java.util.Collections;
+import com.yuicon.memo.config.SecurityManager;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -32,7 +32,7 @@ public class RecordHandler {
     public Mono<ServerResponse> save(ServerRequest request) {
         return request.bodyToMono(Record.class)
                 .flatMap(this.recordRepository::insert)
-                .flatMap(record -> this.userRepository.findById(request.queryParam("uid").orElse(""))
+                .flatMap(record -> this.userRepository.findById(SecurityManager.obtainSubject(request).orElse(""))
                         .flatMap(user -> this.userRepository.save(user.addRecord(record))))
                 .doOnNext(User::buildToken)
                 .flatMap(user -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(user), User.class))

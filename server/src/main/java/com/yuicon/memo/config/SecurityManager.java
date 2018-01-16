@@ -25,14 +25,15 @@ public class SecurityManager {
     private static final List<String> ALLOW_PATH_LIST = Arrays.asList("/login", "/signin");
 
     static Mono<ServerResponse> allowAccessTo(ServerRequest request, HandlerFunction<ServerResponse> next) {
-        if (ALLOW_PATH_LIST.contains(request.path())) {
-            return next.handle(request);
-        }
-        List<String> header = request.headers().header("Authorization");
-        if (!header.isEmpty() && validateToken(header.get(0)).isPresent()) {
+        if (ALLOW_PATH_LIST.contains(request.path()) || obtainSubject(request).isPresent()) {
             return next.handle(request);
         }
         return ServerResponse.status(UNAUTHORIZED).build();
+    }
+
+    public static Optional<String> obtainSubject(ServerRequest request) {
+        List<String> header = request.headers().header("Authorization");
+        return header.isEmpty() ? Optional.empty() : validateToken(header.get(0));
     }
 
     public static String buildToken(String subject) {
@@ -46,7 +47,7 @@ public class SecurityManager {
     public static Optional<String> validateToken(String token) {
         try {
             return Optional.of(Jwts.parser().setSigningKey(KEY.getBytes()).parseClaimsJws(token).getBody().getSubject());
-        } catch (SignatureException e) {
+        } catch (Exception e) {
             return Optional.empty();
         }
     }

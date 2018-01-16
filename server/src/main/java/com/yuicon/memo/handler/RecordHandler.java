@@ -33,10 +33,7 @@ public class RecordHandler {
         return request.bodyToMono(Record.class)
                 .flatMap(this.recordRepository::insert)
                 .flatMap(record -> this.userRepository.findById(request.queryParam("uid").orElse(""))
-                        .flatMap(user -> {
-                            user.setRecords(Collections.singletonList(record));
-                            return this.userRepository.save(user);
-                        }))
+                        .flatMap(user -> this.userRepository.save(user.addRecord(record))))
                 .doOnNext(User::buildToken)
                 .flatMap(user -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(user), User.class))
                 .switchIfEmpty(ServerResponse.unprocessableEntity().build());

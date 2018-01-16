@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.yuicon.memo.config.SecurityManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,10 +28,15 @@ public class User {
     private String masterPassword;
 
     @DBRef
-    private List<Record> records;
+    private List<Record> records = new ArrayList<>();
 
     @Transient
     private String token = "";
+
+    public User addRecord(Record record) {
+        this.records.add(record);
+        return this;
+    }
 
     public void buildToken() {
         this.token =  SecurityManager.buildToken(this.id);

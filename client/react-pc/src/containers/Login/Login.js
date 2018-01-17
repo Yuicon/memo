@@ -28,7 +28,9 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('handleSubmit');
+        this.props.userStore.login(this.state.loginParameters).then(() => {
+
+        });
     };
 
     handleClick = () => {

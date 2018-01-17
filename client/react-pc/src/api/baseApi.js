@@ -3,12 +3,10 @@
  */
 import 'whatwg-fetch';
 
-const authPrefix = 'Token';
-
 export const HOST = 'http://localhost:8080';
 
 export const apiHeaders = {
-    'Authorization': `${authPrefix} ${localStorage.getItem('accessToken')}`,
+    'Authorization': localStorage.getItem('token'),
     'Content-Type': 'application/json',
 };
 

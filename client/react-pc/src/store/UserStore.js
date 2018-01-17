@@ -18,9 +18,24 @@ export class UserStore {
         try {
             return this.rootStore.fetch(async () => {
                 const data = await userApi.create(params);
-                console.log(data);
                 runInAction(() => {
                     this.currentUser = new User(data);
+                    localStorage.setItem("token", this.currentUser.token);
+                });
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    @action('登陆')
+    async login(params = {}) {
+        try {
+            return this.rootStore.fetch(async () => {
+                const data = await userApi.login(params);
+                runInAction(() => {
+                    this.currentUser = new User(data);
+                    localStorage.setItem("token", this.currentUser.token);
                 });
             });
         } catch (e) {
@@ -36,6 +51,7 @@ export class User {
     name = null;
     email = null;
     records = [];
+    token = null;
 
     constructor(obj = null) {
         if (obj) {
@@ -43,6 +59,7 @@ export class User {
             this.name = obj.name;
             this.email = obj.email;
             this.records = obj.records;
+            this.token = obj.token;
         }
     }
 

@@ -7,8 +7,7 @@ import PropTypes from 'prop-types';
 import './Home.css';
 import {inject, observer} from "mobx-react/index";
 import TextButton from "../../components/common/TextButton";
-
-import banner from '../../assets/banner/ac-16-04.jpg';
+import Card from "../../components/Card/Card";
 
 @inject("userStore")
 @observer
@@ -38,7 +37,15 @@ class Home extends Component {
                     </div>
                 </nav>
                 <main>
-
+                    <div className="card-list">
+                        {
+                            Array.from({length: 12}).map((val, index) => {
+                                return (
+                                    <Card key={index} />
+                                );
+                            })
+                        }
+                    </div>
                 </main>
             </div>
         );

@@ -1,0 +1,11 @@
+/**
+ * @author Yuicon
+ */
+
+.card {
+    width: 3.2rem;
+    height: 1.8rem;
+    background-color: white;
+    border-radius: .1rem;
+    margin: .3rem;
+}

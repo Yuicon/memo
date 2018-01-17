@@ -1,0 +1,45 @@
+/**
+ * @author Yuicon
+ */
+
+.home {
+
+}
+
+.home .header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: white;
+    padding: 0 6rem;
+    height: 1.2rem;
+}
+
+.home .title {
+    font-size: .5rem;
+    font-weight: 600;
+    padding-right: .5rem;
+}
+
+.home .banner-href {
+    display: block;
+    height: 180px;
+    background: url('../../assets/banner/ac-16-04.jpg') no-repeat center top;
+    background-size: auto 100%;
+    width: 100%;
+}
+
+.home > nav {
+    background-color: white;
+    border-bottom: 1px solid #cfcfcf;
+    height: 1.1rem;
+}
+
+.home .menu {
+    flex: 1;
+    padding: 0 6rem;
+}
+
+.home > main {
+    height: 100vh;
+}

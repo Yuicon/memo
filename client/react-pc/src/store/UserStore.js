@@ -43,6 +43,21 @@ export class UserStore {
         }
     }
 
+    @action('验证token')
+    async check() {
+        try {
+            return this.rootStore.fetch(async () => {
+                const data = await userApi.check(this.currentUser.token);
+                runInAction(() => {
+                    this.currentUser = new User(data);
+                    localStorage.setItem("token", this.currentUser.token);
+                });
+            });
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
 }
 
 export class User {
@@ -51,7 +66,7 @@ export class User {
     name = null;
     email = null;
     records = [];
-    token = null;
+    token = localStorage.getItem("token");
 
     constructor(obj = null) {
         if (obj) {

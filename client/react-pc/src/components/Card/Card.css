@@ -8,4 +8,9 @@
     background-color: white;
     border-radius: .1rem;
     margin: .3rem;
+    transition: all .5s;
+}
+
+.card:hover {
+    transform: rotateY(180deg) scale(1.1);
 }

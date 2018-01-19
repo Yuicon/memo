@@ -13,6 +13,11 @@ import Card from "../../components/Card/Card";
 @observer
 class Home extends Component {
 
+    propTypes = {
+        userStore: PropTypes.object,
+        history: PropTypes.object,
+    };
+
     componentDidMount() {
         // this.props.userStore.check().then(() => {
         //     /**
@@ -53,10 +58,5 @@ class Home extends Component {
     }
 
 }
-
-Home.propTypes = {
-    userStore: PropTypes.object,
-    history: PropTypes.object,
-};
 
 export default Home;

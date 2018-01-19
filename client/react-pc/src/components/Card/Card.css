@@ -8,9 +8,15 @@
     background-color: white;
     border-radius: .1rem;
     margin: .3rem;
-    transition: all .5s;
+    transition: all .3s;
+}
+
+.card img {
+    width: 4.8rem;
+    height: 2.7rem;
+    border-radius: .1rem;
 }
 
 .card:hover {
-    transform: rotateY(180deg) scale(1.1);
+    transform: scale(1.1);
 }

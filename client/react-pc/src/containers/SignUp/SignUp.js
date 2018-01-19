@@ -13,6 +13,11 @@ import PropTypes from "prop-types";
 @observer
 class SignUp extends Component {
 
+    propTypes = {
+        userStore: PropTypes.object,
+        history: PropTypes.object,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -63,10 +68,5 @@ class SignUp extends Component {
     }
 
 }
-
-SignUp.propTypes = {
-    userStore: PropTypes.object,
-    history: PropTypes.object,
-};
 
 export default SignUp;

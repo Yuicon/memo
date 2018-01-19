@@ -6,6 +6,18 @@ import PropTypes from 'prop-types';
 
 class Button extends Component {
 
+    propTypes = {
+        type: PropTypes.string,
+        onClick: PropTypes.func,
+        other: PropTypes.object,
+        value: PropTypes.string
+    };
+
+    defaultProps = {
+        type: 'button',
+        value: '提交'
+    };
+
     render() {
 
         const {other, onClick, type, value} = this.props;
@@ -19,17 +31,5 @@ class Button extends Component {
     }
 
 }
-
-Button.propTypes = {
-    type: PropTypes.string,
-    onClick: PropTypes.func,
-    other: PropTypes.object,
-    value: PropTypes.string
-};
-
-Button.defaultProps = {
-    type: 'button',
-    value: '提交'
-};
 
 export default Button;

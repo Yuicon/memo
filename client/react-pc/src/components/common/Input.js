@@ -6,6 +6,20 @@ import PropTypes from 'prop-types';
 
 class Input extends Component {
 
+    propTypes = {
+        type: PropTypes.string,
+        name: PropTypes.string,
+        id: PropTypes.string,
+        onChange: PropTypes.func,
+        other: PropTypes.object,
+        required: PropTypes.bool
+    };
+
+    defaultProps = {
+        type: 'text',
+        required: false
+    };
+
     handleChange = (e) => {
         this.props.onChange && this.props.onChange(e.target.value);
     };
@@ -22,19 +36,5 @@ class Input extends Component {
     }
 
 }
-
-Input.propTypes = {
-    type: PropTypes.string,
-    name: PropTypes.string,
-    id: PropTypes.string,
-    onChange: PropTypes.func,
-    other: PropTypes.object,
-    required: PropTypes.bool
-};
-
-Input.defaultProps = {
-    type: 'text',
-    required: false
-};
 
 export default Input;

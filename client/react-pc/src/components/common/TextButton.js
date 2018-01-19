@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 
 class TextButton extends Component {
 
-    propTypes = {
+    static propTypes = {
         onClick: PropTypes.func,
         other: PropTypes.object,
         value: PropTypes.string
     };
 
-    defaultProps = {
+    static defaultProps = {
         value: '提交'
     };
 

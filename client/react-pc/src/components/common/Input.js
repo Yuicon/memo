@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 class Input extends Component {
 
-    propTypes = {
+    static propTypes = {
         type: PropTypes.string,
         name: PropTypes.string,
         id: PropTypes.string,
@@ -15,7 +15,7 @@ class Input extends Component {
         required: PropTypes.bool
     };
 
-    defaultProps = {
+    static defaultProps = {
         type: 'text',
         required: false
     };

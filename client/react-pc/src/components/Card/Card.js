@@ -9,7 +9,7 @@ import logo from '../../assets/logo-1.png';
 
 class Card extends Component {
 
-    propTypes = {
+    static propTypes = {
         logo: PropTypes.string,
     };
 

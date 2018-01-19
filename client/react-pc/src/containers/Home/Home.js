@@ -13,17 +13,17 @@ import Card from "../../components/Card/Card";
 @observer
 class Home extends Component {
 
-    propTypes = {
+    static propTypes = {
         userStore: PropTypes.object,
         history: PropTypes.object,
     };
 
     componentDidMount() {
-        // this.props.userStore.check().then(() => {
-        //     /**
-        //      * 判断是否登陆或者token过期 Todo
-        //       */
-        // });
+        this.props.userStore.check().then(() => {
+            /**
+             * 判断是否登陆或者token过期 Todo
+              */
+        });
     }
 
     render() {

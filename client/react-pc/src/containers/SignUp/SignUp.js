@@ -13,7 +13,7 @@ import PropTypes from "prop-types";
 @observer
 class SignUp extends Component {
 
-    propTypes = {
+    static propTypes = {
         userStore: PropTypes.object,
         history: PropTypes.object,
     };

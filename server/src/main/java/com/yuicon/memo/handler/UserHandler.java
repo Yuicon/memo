@@ -54,8 +54,6 @@ public class UserHandler {
                 .switchIfEmpty(ServerResponse.status(UNAUTHORIZED).build());
     }
 
-
-
     public Mono<ServerResponse> users(ServerRequest request) {
         return ServerResponse.ok().contentType(APPLICATION_JSON)
                 .body(this.userRepository.findAll(), User.class);

@@ -15,6 +15,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
  * @author Yuicon
  */
 @Configuration
+@SuppressWarnings("NullableProblems")
 public class RouteConfig {
 
     private final UserHandler userHandler;

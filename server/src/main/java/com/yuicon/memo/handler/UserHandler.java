@@ -1,5 +1,6 @@
 package com.yuicon.memo.handler;
 
+import com.yuicon.memo.config.SecurityManager;
 import com.yuicon.memo.domain.User;
 import com.yuicon.memo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 /**
@@ -44,6 +46,15 @@ public class UserHandler {
                 .flatMap(user -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(user), User.class))
                 .switchIfEmpty(ServerResponse.notFound().build());
     }
+
+    public Mono<ServerResponse> check(ServerRequest request) {
+        return this.userRepository.findById(SecurityManager.obtainSubject(request).orElse(""))
+                .doOnNext(User::buildToken)
+                .flatMap(user -> ServerResponse.ok().contentType(APPLICATION_JSON).body(Mono.just(user), User.class))
+                .switchIfEmpty(ServerResponse.status(UNAUTHORIZED).build());
+    }
+
+
 
     public Mono<ServerResponse> users(ServerRequest request) {
         return ServerResponse.ok().contentType(APPLICATION_JSON)

@@ -37,6 +37,7 @@ public class RouteConfig {
                 .andRoute(GET("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::user)
                 .andRoute(GET("/user").and(accept(APPLICATION_JSON)), userHandler::findUserByName)
                 .andRoute(POST("/login").and(accept(APPLICATION_JSON)), userHandler::login)
+                .andRoute(POST("/check").and(accept(APPLICATION_JSON)), userHandler::check)
                 .andRoute(DELETE("/user/{id}").and(accept(APPLICATION_JSON)), userHandler::delete)
                 .andRoute(GET("/records").and(accept(APPLICATION_JSON)), recordHandler::records)
                 .andRoute(POST("/record").and(accept(APPLICATION_JSON)), recordHandler::save)

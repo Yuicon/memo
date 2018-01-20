@@ -3,9 +3,9 @@
  */
 
 import React, {Component} from 'react';
-import Input from "../../components/common/Input";
-import Button from "../../components/common/Button";
-import TextButton from "../../components/common/TextButton";
+import Input from "../../components/Common/Input";
+import Button from "../../components/Common/Button";
+import TextButton from "../../components/Common/TextButton";
 import {observer, inject} from "mobx-react";
 import PropTypes from "prop-types";
 

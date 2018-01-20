@@ -6,7 +6,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import './Home.css';
 import {inject, observer} from "mobx-react/index";
-import TextButton from "../../components/common/TextButton";
+import TextButton from "../../components/Common/TextButton";
 import Card from "../../components/Card/Card";
 
 @inject("userStore")
@@ -19,11 +19,15 @@ class Home extends Component {
     };
 
     componentDidMount() {
-        this.props.userStore.check().then(() => {
-            /**
-             * 判断是否登陆或者token过期 Todo
-              */
-        });
+        this.props.userStore.rxCheck().subscribe(
+            data => {
+                console.log(data);
+            },
+            err => {
+                console.log(err);
+                this.props.history.push("/login");
+            }
+        );
     }
 
     render() {

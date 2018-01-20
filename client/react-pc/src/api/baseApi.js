@@ -10,7 +10,7 @@ export const apiHeaders = {
     'Content-Type': 'application/json',
 };
 
-function toQueryString(obj, urlEncode) {
+export function toQueryString(obj, urlEncode) {
     function flattenObj(x, path) {
         const result = [];
 

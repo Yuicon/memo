@@ -4,6 +4,7 @@
 
 import {observable, action, runInAction} from 'mobx'
 import * as userApi from '../api/user';
+import {rxResolve} from "../api/rxBaseApi";
 
 export class UserStore {
 
@@ -56,6 +57,18 @@ export class UserStore {
         } catch (e) {
             console.log(e);
         }
+    }
+
+    @action('rx验证token')
+    rxCheck() {
+        return this.rootStore.rxFetch(userApi.rxCheck(),
+            rxResolve,
+            data => {
+                runInAction(() => {
+                    this.currentUser = new User(data);
+                    localStorage.setItem("token", this.currentUser.token);
+                });
+            });
     }
 
 }

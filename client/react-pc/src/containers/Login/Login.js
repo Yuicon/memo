@@ -33,9 +33,11 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.userStore.login(this.state.loginParameters).then(() => {
-
-        });
+        this.props.userStore.rxLogin(this.state.loginParameters)
+            .subscribe(
+                data => this.props.history.push("/"),
+                err => console.log(err)
+            );
     };
 
     handleClick = () => {

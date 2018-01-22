@@ -45,6 +45,18 @@ export class UserStore {
         }
     }
 
+    @action('登陆')
+    rxLogin(params = {}) {
+        return this.rootStore.rxFetch(userApi.rxLogin(params),
+            rxResolve,
+            data => {
+                runInAction(() => {
+                    this.currentUser = new User(data);
+                    localStorage.setItem("token", this.currentUser.token);
+                });
+            });
+    }
+
     @action('验证token')
     async check() {
         try {
@@ -87,7 +99,7 @@ export class User {
             this.id = obj.id;
             this.name = obj.name;
             this.email = obj.email;
-            this.records = obj.records && obj.records.map(record => Record.build(record) );
+            this.records = obj.records && obj.records.map(record => Record.build(record));
             this.token = obj.token;
         }
     }

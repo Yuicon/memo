@@ -9,6 +9,7 @@ import {rxResolve} from "../api/rxBaseApi";
 import {of} from "rxjs/observable/of";
 import {Observable} from "rxjs/Observable";
 import {switchMap} from "rxjs/operator/switchMap";
+import {RecordStore} from "./RecordStore";
 
 class RootStore {
 
@@ -17,6 +18,7 @@ class RootStore {
 
     constructor() {
         this.userStore = new UserStore(this);
+        this.recordStore = new RecordStore(this);
     }
 
     @action('发起请求')

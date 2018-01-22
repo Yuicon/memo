@@ -5,6 +5,7 @@
 import {observable, action, runInAction} from 'mobx'
 import * as userApi from '../api/user';
 import {rxResolve} from "../api/rxBaseApi";
+import {Record} from "./RecordStore";
 
 export class UserStore {
 
@@ -86,7 +87,7 @@ export class User {
             this.id = obj.id;
             this.name = obj.name;
             this.email = obj.email;
-            this.records = obj.records;
+            this.records = obj.records && obj.records.map(record => Record.build(record) );
             this.token = obj.token;
         }
     }

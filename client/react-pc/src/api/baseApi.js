@@ -6,8 +6,10 @@ import 'whatwg-fetch';
 export const HOST = 'http://localhost:8080';
 
 export const apiHeaders = {
-    'Authorization': localStorage.getItem('token'),
     'Content-Type': 'application/json',
+    get Authorization() {
+        return localStorage.getItem('token');
+    }
 };
 
 export function toQueryString(obj, urlEncode) {

@@ -8,6 +8,7 @@ import './Home.css';
 import {inject, observer} from "mobx-react/index";
 import TextButton from "../../components/Common/TextButton";
 import Card from "../../components/Card/Card";
+import RecordFrom from "../../components/Record/RecordFrom";
 
 @inject("userStore")
 @observer
@@ -19,15 +20,15 @@ class Home extends Component {
     };
 
     componentDidMount() {
-        this.props.userStore.rxCheck().subscribe(
-            data => {
-                console.log(data);
-            },
-            err => {
-                console.log(err);
-                this.props.history.push("/login");
-            }
-        );
+        // this.props.userStore.rxCheck().subscribe(
+        //     data => {
+        //         console.log(data);
+        //     },
+        //     err => {
+        //         console.log(err);
+        //         this.props.history.push("/login");
+        //     }
+        // );
     }
 
     render() {
@@ -40,9 +41,9 @@ class Home extends Component {
                 </header>
                 <a href="#" target="_blank" className="banner-href"/>
                 <nav className="flex">
-                    <div className="menu flex">
-                        <p>标签1</p>
-                        <p>标签2</p>
+                    <div className="menu-list flex">
+                        <TextButton value="增加"/>
+                        <TextButton value="标签2"/>
                     </div>
                 </nav>
                 <main>
@@ -56,6 +57,7 @@ class Home extends Component {
                         }
                     </div>
                 </main>
+                <RecordFrom/>
             </div>
         );
 

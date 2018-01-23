@@ -3,7 +3,7 @@
  */
 
 .home {
-
+    min-width: 1280px;
 }
 
 .home .header {
@@ -35,9 +35,15 @@
     height: 1.1rem;
 }
 
-.home .menu {
+.home .menu-lists {
     flex: 1;
     padding: 0 6rem;
+}
+
+.menu {
+    font-size: .3rem;
+    color: #007fff;
+    padding: .3rem;
 }
 
 .home > main {

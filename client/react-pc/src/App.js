@@ -18,6 +18,7 @@ class App extends Component {
             <Provider
                 rootStore={rootStore}
                 userStore={rootStore.userStore}
+                recordStore={rootStore.recordStore}
             >
                 <Router>
                     <main className="App">

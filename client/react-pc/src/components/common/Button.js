@@ -10,20 +10,22 @@ class Button extends Component {
         type: PropTypes.string,
         onClick: PropTypes.func,
         other: PropTypes.object,
-        value: PropTypes.string
+        value: PropTypes.string,
+        style: PropTypes.object,
     };
 
     static defaultProps = {
         type: 'button',
-        value: '提交'
+        value: '提交',
+        style: {}
     };
 
     render() {
 
-        const {other, onClick, type, value} = this.props;
+        const {other, onClick, type, value, style} = this.props;
 
         return (
-            <button className='button' {...other} type={type} onClick={onClick}>
+            <button className='button' {...other} type={type} onClick={onClick} style={style}>
                 <span>{value}</span>
             </button>
         );

@@ -28,8 +28,8 @@ export class RecordStore {
 export class Record {
 
     id = null;
-    source = null;
-    items = [];
+    source = undefined;
+    items = [{}];
 
     static build(record) {
         return new Record(record);
@@ -47,8 +47,8 @@ export class Record {
 
 export class Item {
 
-    label = null;
-    value = null;
+    label = undefined;
+    value = undefined;
 
     static buildItem(item) {
         return new Item(item)

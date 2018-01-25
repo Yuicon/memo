@@ -33,6 +33,12 @@ class Input extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value !== this.props.value) {
+            this.setState({value: nextProps.value}, () => console.log(this.state.value));
+        }
+    }
+
     handleChange = (e) => {
         this.setState({value: e.target.value}, () => {
             this.props.onChange && this.props.onChange(this.state.value);

@@ -27,8 +27,14 @@ class RecordFrom extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            record: this.props.record,
+            record: new Record(),
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.record.id !== this.props.record.id) {
+            this.setState({record: nextProps.record}, () => console.log(this.state.record));
+        }
     }
 
 
@@ -91,7 +97,7 @@ class RecordFrom extends Component {
                 <form className="flex" onSubmit={this.handleSubmit}>
                     <h3>记录</h3>
                     <label htmlFor="source">标识</label>
-                    <Input type="text" name="source" id="source" required={true}
+                    <Input type="text" name="source" id="source" required={true} value={this.state.record.source}
                            onChange={this.handleChange.bind(this, 'source')}/>
                     <label>内容</label>
                     {

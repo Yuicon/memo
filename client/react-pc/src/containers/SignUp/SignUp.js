@@ -21,21 +21,22 @@ class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loginParameters: {},
+            signInParameters: {},
         };
     }
 
     handleChange = (field, value) => {
-        const loginParameters = Object.assign({}, this.state.loginParameters);
-        loginParameters[field] = value;
-        this.setState({loginParameters}, () => console.log(this.state.loginParameters));
+        const signInParameters = Object.assign({}, this.state.signInParameters);
+        signInParameters[field] = value;
+        this.setState({signInParameters}, () => console.log(this.state.signInParameters));
     };
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.userStore.signUpAction(this.state.loginParameters).then(() => {
-            console.log(this.props.userStore.currentUser);
-        })
+        this.props.userStore.rxSignUpAction(this.state.signInParameters).subscribe(
+            data => this.props.history.push('/'),
+            err => console.log(err)
+        )
     };
 
     handleClick = () => {

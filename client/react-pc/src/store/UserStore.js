@@ -30,6 +30,18 @@ export class UserStore {
         }
     }
 
+    @action('注册')
+    rxSignUpAction(params = {}) {
+        return this.rootStore.rxFetch(userApi.rxCreate(params),
+            rxResolve,
+            data => {
+                runInAction(() => {
+                    this.currentUser = new User(data);
+                    localStorage.setItem("token", this.currentUser.token);
+                });
+            });
+    }
+
     @action('登陆')
     async login(params = {}) {
         try {

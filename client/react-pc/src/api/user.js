@@ -6,11 +6,11 @@ import {http, resolve} from "./baseApi";
 import {rxHttp} from "./rxBaseApi";
 
 export function create(params = {}) {
-    return http.post('user', params).then(resolve);
+    return http.post('signin', params).then(resolve);
 }
 
 export function rxCreate(params = {}) {
-    return rxHttp.post('user', params);
+    return rxHttp.post('signin', params);
 }
 
 export function login(params = {}) {

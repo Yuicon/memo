@@ -62,9 +62,9 @@ class RootStore {
      */
     @action('rx请求入口')
     rxFetch(rxApi, resolve = rxResolve, runAction = (data) => console.log(data)) {
-        return rxApi::switchMap(response => {
+        return rxApi::switchMap(async response => {
             if (response.ok) {
-                const data = rxResolve(response);
+                const data = await rxResolve(response);
                 runAction(data);
                 return Observable::of(data);
             } else {

@@ -20,15 +20,15 @@ class Home extends Component {
     };
 
     componentDidMount() {
-        // this.props.userStore.rxCheck().subscribe(
-        //     data => {
-        //         console.log(data);
-        //     },
-        //     err => {
-        //         console.log(err);
-        //         this.props.history.push("/login");
-        //     }
-        // );
+        this.props.userStore.rxCheck().subscribe(
+            data => {
+                console.log(data);
+            },
+            err => {
+                console.log(err);
+                this.props.history.push("/login");
+            }
+        );
     }
 
     render() {

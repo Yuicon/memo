@@ -29,7 +29,7 @@ export class Record {
 
     id = null;
     source = undefined;
-    items = [{}];
+    items = [];
 
     static build(record) {
         return new Record(record);

@@ -31,7 +31,7 @@ public class RecordHandler {
 
     public Mono<ServerResponse> save(ServerRequest request) {
         return request.bodyToMono(Record.class)
-                .flatMap(this.recordRepository::insert)
+                .flatMap(this.recordRepository::save)
                 .flatMap(record -> this.userRepository.findById(SecurityManager.obtainSubject(request).orElse(""))
                         .flatMap(user -> this.userRepository.save(user.addRecord(record))))
                 .doOnNext(User::buildToken)

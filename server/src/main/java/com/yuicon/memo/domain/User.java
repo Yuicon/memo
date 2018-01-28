@@ -7,9 +7,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.yuicon.memo.config.SecurityManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * @author Yuicon
@@ -28,7 +26,7 @@ public class User {
     private String masterPassword;
 
     @DBRef
-    private List<Record> records = new ArrayList<>();
+    private Set<Record> records = new HashSet<>();
 
     @Transient
     private String token = "";
@@ -64,11 +62,11 @@ public class User {
         this.token = token;
     }
 
-    public List<Record> getRecords() {
+    public Set<Record> getRecords() {
         return records;
     }
 
-    public void setRecords(List<Record> records) {
+    public void setRecords(Set<Record> records) {
         this.records = records;
     }
 

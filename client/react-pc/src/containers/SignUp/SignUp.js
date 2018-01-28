@@ -34,7 +34,7 @@ class SignUp extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.userStore.rxSignUpAction(this.state.signInParameters).subscribe(
-            data => this.props.history.push('/'),
+            () => this.props.history.push('/'),
             err => console.log(err)
         )
     };

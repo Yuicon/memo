@@ -30,8 +30,8 @@ class Home extends Component {
 
     componentDidMount() {
         this.props.userStore.rxCheck().subscribe(
-            data => {
-                console.log(data);
+            response => {
+                console.log(response);
             },
             err => {
                 console.log(err);

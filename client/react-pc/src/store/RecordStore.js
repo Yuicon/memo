@@ -1,9 +1,8 @@
 /**
  * @author Yuicon
  */
-import {observable, action, runInAction} from 'mobx'
+import {action, runInAction} from 'mobx'
 import * as recordApi from '../api/record';
-import {rxResolve} from "../api/rxBaseApi";
 import {User} from "./UserStore";
 
 export class RecordStore {
@@ -15,7 +14,6 @@ export class RecordStore {
     @action('创建记录')
     rxCreate(params) {
         return this.rootStore.rxFetch(recordApi.rxCreate(params),
-            rxResolve,
             data => {
                 runInAction(() => {
                     this.rootStore.userStore.currentUser = new User(data);

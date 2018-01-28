@@ -35,7 +35,7 @@ class Login extends Component {
         e.preventDefault();
         this.props.userStore.rxLogin(this.state.loginParameters)
             .subscribe(
-                data => this.props.history.push("/"),
+                () => this.props.history.push("/"),
                 err => console.log(err)
             );
     };

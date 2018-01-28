@@ -4,7 +4,6 @@
 
 import {observable, action, runInAction} from 'mobx'
 import * as userApi from '../api/user';
-import {rxResolve} from "../api/rxBaseApi";
 import {Record} from "./RecordStore";
 
 export class UserStore {
@@ -33,7 +32,6 @@ export class UserStore {
     @action('注册')
     rxSignUpAction(params = {}) {
         return this.rootStore.rxFetch(userApi.rxCreate(params),
-            rxResolve,
             data => {
                 runInAction(() => {
                     this.currentUser = new User(data);
@@ -60,7 +58,6 @@ export class UserStore {
     @action('登陆')
     rxLogin(params = {}) {
         return this.rootStore.rxFetch(userApi.rxLogin(params),
-            rxResolve,
             data => {
                 runInAction(() => {
                     this.currentUser = new User(data);
@@ -87,7 +84,6 @@ export class UserStore {
     @action('rx验证token')
     rxCheck() {
         return this.rootStore.rxFetch(userApi.rxCheck(),
-            rxResolve,
             data => {
                 runInAction(() => {
                     this.currentUser = new User(data);

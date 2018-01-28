@@ -50,13 +50,6 @@ function post(url, params = {}, host = HOST) {
     });
 }
 
-export function rxResolve(res) {
-    return res.json().then(
-        (data) => {
-            return data;
-        });
-}
-
 export const rxHttp = {};
 rxHttp.get = get;
 rxHttp.post = post;

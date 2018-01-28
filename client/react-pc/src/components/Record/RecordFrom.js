@@ -10,6 +10,7 @@ import {inject, observer} from "mobx-react/index";
 import {Item, Record} from "../../store/RecordStore";
 import MdNoteAdd from 'react-icons/lib/md/note-add';
 import MdSpeakerNotesOff from 'react-icons/lib/md/speaker-notes-off';
+import MdClear from 'react-icons/lib/md/clear';
 
 @inject("recordStore")
 @observer
@@ -19,6 +20,7 @@ class RecordFrom extends Component {
         recordStore: PropTypes.object,
         record: PropTypes.object,
         visible: PropTypes.bool,
+        onClose: PropTypes.func,
     };
 
     static defaultProps = {
@@ -66,6 +68,10 @@ class RecordFrom extends Component {
         this.setState({record: recordParameters}, () => console.log(this.state.record));
     };
 
+    handleClose = () => {
+        this.props.onClose && this.props.onClose();
+    };
+
     render() {
 
         const ItemView = (props) => {
@@ -77,7 +83,7 @@ class RecordFrom extends Component {
             const valueChange = value => item.value = value;
 
             return (
-                <div style={{display: 'flex', margin: '.1rem'}}>
+                <div style={{display: 'flex', margin: '.1rem', transition: 'all .3s'}}>
                     <Input type="text" name="label" id="label" required={true} value={item.label}
                            style={{width: '18%', marginRight: '2%'}}
                            onChange={labelChange}/>
@@ -96,7 +102,17 @@ class RecordFrom extends Component {
         return (
             <Portal visible={this.props.visible}>
                 <form className="flex" onSubmit={this.handleSubmit}>
-                    <h3>记录</h3>
+                   <div style={{
+                       flex: '100%',
+                       display: 'flex',
+                       alignItems: 'center',
+                       justifyContent: 'space-between',
+                       fontSize: '.4rem',
+                       paddingBottom: '.5rem',
+                   }}>
+                       <h3>记录</h3>
+                       <MdClear style={{cursor: 'pointer'}} onClick={this.handleClose}/>
+                   </div>
                     <label htmlFor="source">标识</label>
                     <Input type="text" name="source" id="source" required={true} value={this.state.record.source}
                            onChange={this.handleChange.bind(this, 'source')}/>

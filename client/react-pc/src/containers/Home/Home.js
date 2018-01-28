@@ -44,6 +44,10 @@ class Home extends Component {
         this.setState({record, visible: true});
     };
 
+    handleClose = () => {
+        this.setState({visible: false});
+    };
+
     render() {
 
         const {visible, record} = this.state;
@@ -74,7 +78,7 @@ class Home extends Component {
                         }
                     </div>
                 </main>
-                <RecordFrom visible={visible} record={record}/>
+                <RecordFrom visible={visible} record={record} onClose={this.handleClose}/>
             </div>
         );
 

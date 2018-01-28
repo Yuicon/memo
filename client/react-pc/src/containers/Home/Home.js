@@ -48,6 +48,10 @@ class Home extends Component {
         this.setState({visible: false});
     };
 
+    handleAdd = () => {
+        this.setState({record: Record.build(), visible: true});
+    };
+
     render() {
 
         const {visible, record} = this.state;
@@ -63,7 +67,7 @@ class Home extends Component {
                 <a href="#" target="_blank" className="banner-href"/>
                 <nav className="flex">
                     <div className="menu-list flex">
-                        <TextButton value="增加"/>
+                        <TextButton value="增加" onClick={this.handleAdd}/>
                         <TextButton value="标签2"/>
                     </div>
                 </nav>

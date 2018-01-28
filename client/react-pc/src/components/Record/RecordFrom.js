@@ -51,7 +51,7 @@ class RecordFrom extends Component {
         e.preventDefault();
         this.props.recordStore.rxCreate(this.state.record)
             .subscribe(
-                data => console.log(data),
+                () => this.handleClose(),
                 err => console.log(err)
             );
     };

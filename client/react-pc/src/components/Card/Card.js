@@ -10,13 +10,17 @@ import logo from '../../assets/logo-1.png';
 class Card extends Component {
 
     static propTypes = {
-        logo: PropTypes.string,
+        onClick: PropTypes.func,
+    };
+
+    static defaultProps = {
+      onClick: () => {}
     };
 
     render() {
 
         return (
-            <div className="card">
+            <div className="card" onClick={this.props.onClick}>
                 <img  src={logo} alt="logo"/>
             </div>
         );

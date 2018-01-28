@@ -9,6 +9,7 @@ import {inject, observer} from "mobx-react/index";
 import TextButton from "../../components/Common/TextButton";
 import Card from "../../components/Card/Card";
 import RecordFrom from "../../components/Record/RecordFrom";
+import {Record} from "../../store/RecordStore";
 
 @inject("userStore")
 @observer
@@ -18,6 +19,14 @@ class Home extends Component {
         userStore: PropTypes.object,
         history: PropTypes.object,
     };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            visible: false,
+            record: Record.build(),
+        };
+    }
 
     componentDidMount() {
         this.props.userStore.rxCheck().subscribe(
@@ -31,7 +40,15 @@ class Home extends Component {
         );
     }
 
+    handleClick = (record) => {
+        this.setState({record, visible: true});
+    };
+
     render() {
+
+        const {visible, record} = this.state;
+
+        const currentUser = this.props.userStore.currentUser;
 
         return (
             <div className="home">
@@ -49,15 +66,15 @@ class Home extends Component {
                 <main>
                     <div className="card-list">
                         {
-                            Array.from({length: 12}).map((val, index) => {
+                            currentUser.records.map(record => {
                                 return (
-                                    <Card key={index} />
+                                    <Card key={record.id} onClick={this.handleClick.bind(this, record)}/>
                                 );
                             })
                         }
                     </div>
                 </main>
-                <RecordFrom/>
+                <RecordFrom visible={visible} record={record}/>
             </div>
         );
 

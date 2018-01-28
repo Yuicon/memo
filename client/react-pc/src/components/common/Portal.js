@@ -9,19 +9,32 @@ class Portal extends Component {
 
     static propTypes = {
         children: PropTypes.element,
+        visible: PropTypes.bool,
+    };
+
+    static defaultProps = {
+        visible: false
     };
 
     render() {
-        return createPortal(
-            <div className="portal">
-                <div>
-                    <main>
-                        {this.props.children}
-                    </main>
-                </div>
-            </div>,
-            document.getElementById('portal')
-        );
+
+        let portal = null;
+
+        if (this.props.visible) {
+            portal =  createPortal(
+                <div className="portal">
+                    <div>
+                        <main>
+                            {this.props.children}
+                        </main>
+                    </div>
+                </div>,
+                document.getElementById('portal')
+            );
+        }
+
+        return portal;
+
     }
 
 }

@@ -18,6 +18,7 @@ class RecordFrom extends Component {
     static propTypes = {
         recordStore: PropTypes.object,
         record: PropTypes.object,
+        visible: PropTypes.bool,
     };
 
     static defaultProps = {
@@ -93,7 +94,7 @@ class RecordFrom extends Component {
         };
 
         return (
-            <Portal>
+            <Portal visible={this.props.visible}>
                 <form className="flex" onSubmit={this.handleSubmit}>
                     <h3>记录</h3>
                     <label htmlFor="source">标识</label>

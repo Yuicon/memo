@@ -5,9 +5,17 @@ package com.yuicon.memo.domain;
  */
 public class Item {
 
+    private int id;
+
+    private int recordId;
+
     private String label;
 
     private String value;
+
+    private int sequence;
+
+    private boolean delete;
 
     @Override
     public String toString() {
@@ -15,6 +23,38 @@ public class Item {
                 "label='" + label + '\'' +
                 ", value='" + value + '\'' +
                 '}';
+    }
+
+    public boolean isDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
+    }
+
+    public int getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
+
+    public int getRecordId() {
+        return recordId;
+    }
+
+    public void setRecordId(int recordId) {
+        this.recordId = recordId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLabel() {

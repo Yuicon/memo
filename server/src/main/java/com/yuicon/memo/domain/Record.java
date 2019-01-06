@@ -1,49 +1,47 @@
 package com.yuicon.memo.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * @author Yuicon
  */
-@Document
 public class Record {
 
-    @Id
-    private String id;
+    private int id;
+
+    private int uid;
 
     private String source;
 
+    private LocalDateTime createTime;
+
+    private boolean delete;
+
     private List<Item> items;
 
-    @Override
-    public String toString() {
-        return "Record{" +
-                "id='" + id + '\'' +
-                ", source='" + source + '\'' +
-                ", items=" + items +
-                '}';
+    public boolean isDelete() {
+        return delete;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Record record = (Record) o;
-
-        return id != null ? id.equals(record.id) : record.id == null;
+    public void setDelete(boolean delete) {
+        this.delete = delete;
     }
 
-    @Override
-    public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public List<Item> getItems() {
@@ -54,11 +52,11 @@ public class Record {
         this.items = items;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

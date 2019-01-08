@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 /**
  * @author Yuicon
  */
-@RestController("records")
+@RestController
 public class RecordController {
 
     private final RecordRepository recordRepository;
@@ -23,12 +23,12 @@ public class RecordController {
         this.recordRepository = recordRepository;
     }
 
-    @PostMapping()
+    @PostMapping("records")
     public Mono<JsonResponse> insert(@RequestBody Record record) {
         return Mono.justOrEmpty(JsonResponse.success("创建成功", recordRepository.insert(record)));
     }
 
-    @GetMapping()
+    @GetMapping("records")
     public Mono<JsonResponse> findAll(@RequestHeader("user") String userString) {
         User user = gson.fromJson(userString, User.class);
         return Mono.justOrEmpty(JsonResponse.success(recordRepository.findByUid(user.getId())));

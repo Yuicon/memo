@@ -22,7 +22,7 @@ public interface ItemRepository {
      * @param item 条目
      * @return 影响数量
      */
-    @Insert("INSERT INTO ngdc.item (recordId, label, value)" +
+    @Insert("INSERT INTO yuicon.item (recordId, label, value)" +
             " VALUES (#{item.recordId}, #{item.label}, #{item.value})")
     int insert(@Param("item") Item item);
 
@@ -32,7 +32,7 @@ public interface ItemRepository {
      * @param recordId 记录id
      * @return 该记录的条目
      */
-    @Select("SELECT * FROM ngdc.item WHERE recordId = #{recordId} AND delete = false")
+    @Select("SELECT * FROM yuicon.item WHERE recordId = #{recordId} AND isDelete = 0")
     List<Item> findByRecordId(@Param("recordId") int recordId);
 
 

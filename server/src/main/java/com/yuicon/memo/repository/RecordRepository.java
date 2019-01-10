@@ -22,7 +22,7 @@ public interface RecordRepository {
      * @param record 记录
      * @return 影响数量
      */
-    @Insert("INSERT INTO ngdc.record (uid, source, createTime)" +
+    @Insert("INSERT INTO yuicon.record (uid, source, createTime)" +
             " VALUES (#{record.uid}, #{record.source}, #{record.createTime})")
     int insert(@Param("record") Record record);
 
@@ -32,7 +32,7 @@ public interface RecordRepository {
      * @param uid 用户id
      * @return 该用户的记录
      */
-    @Select("SELECT * FROM ngdc.record WHERE uid = #{uid} AND delete = false")
+    @Select("SELECT * FROM yuicon.record WHERE uid = #{uid} AND isDelete = 0")
     List<Record> findByUid(@Param("uid") int uid);
 
 

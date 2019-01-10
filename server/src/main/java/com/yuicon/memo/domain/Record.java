@@ -16,16 +16,16 @@ public class Record {
 
     private LocalDateTime createTime;
 
-    private boolean delete;
+    private boolean isDelete;
 
     private List<Item> items;
 
     public boolean isDelete() {
-        return delete;
+        return isDelete;
     }
 
     public void setDelete(boolean delete) {
-        this.delete = delete;
+        this.isDelete = delete;
     }
 
     public LocalDateTime getCreateTime() {

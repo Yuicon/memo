@@ -15,7 +15,7 @@ public class Item {
 
     private int sequence;
 
-    private boolean delete;
+    private boolean isDelete;
 
     @Override
     public String toString() {
@@ -26,11 +26,11 @@ public class Item {
     }
 
     public boolean isDelete() {
-        return delete;
+        return isDelete;
     }
 
     public void setDelete(boolean delete) {
-        this.delete = delete;
+        this.isDelete = delete;
     }
 
     public int getSequence() {

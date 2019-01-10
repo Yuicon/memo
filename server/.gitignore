@@ -25,4 +25,5 @@ nbdist/
 /.idea/
 /.mvn/
 /src/main/resources/application-product.properties
+.gz
 

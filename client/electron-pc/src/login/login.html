@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+<div>
+    <div>
+        <label for="email">邮箱:</label>
+        <input id="email" type="email" name="email" onchange="input(this.value, 'email')">
+    </div>
+    <div>
+        <label for="password">密码:</label>
+        <input id="password" type="password" name="password" onchange="input(this.value, 'password')">
+    </div>
+    <div>
+        <button onclick="login()">登陆</button>
+    </div>
+</div>
+<script type="text/javascript" src="login.js"></script>
+</body>
+</html>

@@ -34,7 +34,7 @@ class SignUp extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.userStore.rxSignUpAction(this.state.signInParameters).subscribe(
-            () => this.props.history.push('/'),
+            () => this.props.history.push('/login'),
             err => console.log(err)
         )
     };
@@ -51,16 +51,16 @@ class SignUp extends Component {
                     <label htmlFor="email">邮箱</label>
                     <Input type="email" name="email" id="email" required={true}
                            onChange={this.handleChange.bind(this, 'email')}/>
-                    <label htmlFor="name">昵称</label>
-                    <Input type="text" name="name" id="name" required={true}
-                           onChange={this.handleChange.bind(this, 'name')}/>
-                    <label htmlFor="masterPassword">主密码</label>
-                    <Input type="password" name="masterPassword" id="masterPassword" required={true}
+                    <label htmlFor="username">昵称</label>
+                    <Input type="text" name="username" id="username" required={true}
+                           onChange={this.handleChange.bind(this, 'username')}/>
+                    <label htmlFor="password">主密码</label>
+                    <Input type="password" name="password" id="password" required={true}
                            other={{
                                autoComplete: 'off',
                                minLength: 6
                            }}
-                           onChange={this.handleChange.bind(this, 'masterPassword')}/>
+                           onChange={this.handleChange.bind(this, 'password')}/>
                     <Button type='submit' value='注册'/>
                     <TextButton value='登陆' onClick={this.handleClick}/>
                 </form>

@@ -3,7 +3,7 @@
  */
 import 'whatwg-fetch';
 
-export const HOST = 'http://localhost:8080';
+export const HOST = 'http://localhost:15555';
 
 export const apiHeaders = {
     'Content-Type': 'application/json',

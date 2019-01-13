@@ -10,7 +10,7 @@ export function create(params = {}) {
 }
 
 export function rxCreate(params = {}) {
-    return rxHttp.post('signin', params);
+    return rxHttp.post('user-service/public/register', params);
 }
 
 export function login(params = {}) {
@@ -18,7 +18,7 @@ export function login(params = {}) {
 }
 
 export function rxLogin(params = {}) {
-    return rxHttp.post('login', params);
+    return rxHttp.post('user-service/public/login', params);
 }
 
 export function check(token = localStorage.getItem("token")) {

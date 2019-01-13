@@ -58,10 +58,12 @@ export class UserStore {
     @action('登陆')
     rxLogin(params = {}) {
         return this.rootStore.rxFetch(userApi.rxLogin(params),
-            data => {
+            res => {
                 runInAction(() => {
-                    this.currentUser = new User(data);
-                    localStorage.setItem("token", this.currentUser.token);
+                    if (res.success) {
+                        localStorage.setItem("accessToken", res.data.accessToken);
+                        localStorage.setItem("refreshToken", res.data.refreshToken);
+                    }
                 });
             });
     }

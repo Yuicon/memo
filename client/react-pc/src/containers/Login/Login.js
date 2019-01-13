@@ -52,12 +52,12 @@ class Login extends Component {
                     <label htmlFor="email">邮箱</label>
                     <Input type="email" name="email" id="email" required={true}
                            onChange={this.handleChange.bind(this, 'email')}/>
-                    <label htmlFor="masterPassword">主密码</label>
-                    <Input type="password" name="masterPassword" id="masterPassword" required={true}
+                    <label htmlFor="password">主密码</label>
+                    <Input type="password" name="password" id="password" required={true}
                            other={{
                                autoComplete: 'off'
                            }}
-                           onChange={this.handleChange.bind(this, 'masterPassword')}/>
+                           onChange={this.handleChange.bind(this, 'password')}/>
                     <Button type='submit' value='登陆'/>
                     <TextButton value='注册' onClick={this.handleClick}/>
                 </form>

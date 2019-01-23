@@ -1,19 +1,18 @@
-/**
- * @author Yuicon
- */
-
-const loginParam = {};
+const registerParam = {};
 const BrowserWindow = require('electron').remote.BrowserWindow;
 const path = require('path');
 
 const input = (value, col) => {
-    loginParam[col] = value;
-    console.log(loginParam);
+    registerParam[col] = value;
+    console.log(registerParam);
 };
 
-const register = () => {
+const login = () => {
+    const register =  BrowserWindow.getAllWindows().find(win => win.getTitle() === "注册");
+    register.hide();
+
     const main =  BrowserWindow.getAllWindows().find(win => win.getTitle() === "密码管理");
-    const modalPath = path.resolve("src/register/register.html");
+    const modalPath = path.resolve('src/login/login.html');
     let win = new BrowserWindow({
         width: 400,
         height: 320,
@@ -30,12 +29,10 @@ const register = () => {
     });
 
     win.loadURL(modalPath);
-    win.show();
-    const login =  BrowserWindow.getAllWindows().find(win => win.getTitle() === "登录");
-    login.hide();
+    win.show()
 };
 
-const login = () => {
+const register = () => {
     fetch('https://api.bilibili.com/x/web-interface/search/default')
         .then((response) => {
             return response.json();
@@ -43,6 +40,6 @@ const login = () => {
         .then((json) => {
             console.log(json);
         });
-    const login =  BrowserWindow.getAllWindows().find(win => win.getTitle() === "登录");
-    // login.close();
+    const register =  BrowserWindow.getAllWindows().find(win => win.getTitle() === "注册");
+    // register.close();
 };

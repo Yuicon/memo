@@ -2,6 +2,8 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
+localStorage.clear();
+
 let token = localStorage.getItem("token");
 const BrowserWindow = require('electron').remote.BrowserWindow;
 const path = require('path');

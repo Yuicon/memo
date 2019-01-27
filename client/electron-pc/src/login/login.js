@@ -5,6 +5,7 @@
 const loginParam = {};
 const BrowserWindow = require('electron').remote.BrowserWindow;
 const path = require('path');
+const requestX = require('../common/constant');
 
 const input = (value, col) => {
     loginParam[col] = value;
@@ -12,6 +13,7 @@ const input = (value, col) => {
 };
 
 const register = () => {
+    console.log(localStorage.getItem("token"));
     const main =  BrowserWindow.getAllWindows().find(win => win.getTitle() === "密码管理");
     const modalPath = path.resolve("src/register/register.html");
     let win = new BrowserWindow({
@@ -36,13 +38,10 @@ const register = () => {
 };
 
 const login = () => {
-    fetch('https://api.bilibili.com/x/web-interface/search/default')
-        .then((response) => {
-            return response.json();
-        })
-        .then((json) => {
-            console.log(json);
-        });
-    const login =  BrowserWindow.getAllWindows().find(win => win.getTitle() === "登录");
-    // login.close();
+    requestX.post("user-service/public/login", loginParam).then(body => {
+        localStorage.setItem("accessToken", body.data.accessToken);
+        localStorage.setItem("refreshToken", body.data.refreshToken);
+        const login =  BrowserWindow.getAllWindows().find(win => win.getTitle() === "登录");
+        login.close();
+    }).catch((err) => console.log(err));
 };
